@@ -1,0 +1,7 @@
+This project contains a structure generator for LaTeX Assignments.
+
+Note: There are better ways for organizing LaTeX projects, but this one is one of simplest I know of (especially with beginners in mind).
+
+Documentation is available at the top of generator.sh
+
+Contains a starting point for LaTex projects as well (basic gitignore & vscode configuration).
