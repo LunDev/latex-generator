@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# VERSION: 2.0.1 (18.10.2018;DD.MM.YYYY)
+# VERSION: 2.1.1 (05.04.2019;DD.MM.YYYY)
 # AUTHOR: Marvin Vogt (LunDev)
+# LICENSE: GNU General Public License v3.0
+# WEBSITE: https://github.com/LunDev/latex-generator
 
 # GENERAL INFORMATION:
 #  This script relies on the two files template/abgabeXX.tex & template/taskX.tex as templates.
-#  Please customize them to your liking before you use this generator.
+#  Please customize them to your liking before using this generator.
 
 # USAGE:
 #  This script will ask for configuration information during execution:
