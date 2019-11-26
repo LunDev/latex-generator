@@ -154,6 +154,20 @@ while IFS=',' read -ra ADDR; do
     done
 done <<< "$IN"
 
+# add images folder
+read -p 'Do you want to add an images folder? (y/N): ' imageFolderToggle
+imageFolderToggle=$(evaluateConfirmation $imageFolderToggle)
+if [ $imageFolderToggle == 'x' ]; then
+    echo "unknown option, only y,Y,j,J,n,N supported"
+    exit
+fi
+
+if [ $imageFolderToggle == 'y' ]; then
+    toAddDirImg="/images"
+    dirImg="$blattDir$toAddDirImg";
+    mkdir $dirImg
+fi
+
 read -p 'Do you want to insert custom headings? (y/N): ' cHeadingsToggle
 cHeadingsToggle=$(evaluateConfirmation $cHeadingsToggle)
 if [ $cHeadingsToggle == 'x' ]; then
