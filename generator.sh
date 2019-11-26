@@ -96,6 +96,11 @@ mkdir $taskDir
 
 read -p 'Tasks (comma separated, without spaces): ' IN
 
+read -p 'Specify how you call tasks (Aufgabe): ' taskname
+if [ ${#taskname} -lt 1 ]; then
+    taskname="Aufgabe"
+fi
+
 read -p 'Do you want to prefix every task with the BlattNr? (y/N): ' prefixToggle
 prefixToggle=$(evaluateConfirmation $prefixToggle)
 if [ $prefixToggle == 'x' ]; then
@@ -273,7 +278,7 @@ while IFS= read -r line; do
 
             taskTypeL=${taskType[$counter]}
             if [ $taskTypeL = "heading-only" ] || [ $taskTypeL = "normal" ]; then
-                echo "\\section*{Aufgabe ${taskShowname[$counter]}$insertCHeading}" >> "$fullFilename"
+                echo "\\section*{$taskname ${taskShowname[$counter]}$insertCHeading}" >> "$fullFilename"
                 written=true
             elif [ $taskTypeL = "sub-heading" ]; then
                 echo "\\subsection*{${taskShowname[$counter]})$insertCHeading}" >> "$fullFilename"
