@@ -96,6 +96,11 @@ mkdir $taskDir
 
 read -p 'Tasks (comma separated, without spaces): ' IN
 
+read -p 'Specify how you call tasks (Aufgabe): ' taskname
+if [ ${#taskname} -lt 1 ]; then
+    taskname="Aufgabe"
+fi
+
 read -p 'Do you want to prefix every task with the BlattNr? (y/N): ' prefixToggle
 prefixToggle=$(evaluateConfirmation $prefixToggle)
 if [ $prefixToggle == 'x' ]; then
@@ -153,6 +158,20 @@ while IFS=',' read -ra ADDR; do
         maxCount=$counter
     done
 done <<< "$IN"
+
+# add images folder
+read -p 'Do you want to add an images folder? (y/N): ' imageFolderToggle
+imageFolderToggle=$(evaluateConfirmation $imageFolderToggle)
+if [ $imageFolderToggle == 'x' ]; then
+    echo "unknown option, only y,Y,j,J,n,N supported"
+    exit
+fi
+
+if [ $imageFolderToggle == 'y' ]; then
+    toAddDirImg="/images"
+    dirImg="$blattDir$toAddDirImg";
+    mkdir $dirImg
+fi
 
 read -p 'Do you want to insert custom headings? (y/N): ' cHeadingsToggle
 cHeadingsToggle=$(evaluateConfirmation $cHeadingsToggle)
@@ -259,7 +278,7 @@ while IFS= read -r line; do
 
             taskTypeL=${taskType[$counter]}
             if [ $taskTypeL = "heading-only" ] || [ $taskTypeL = "normal" ]; then
-                echo "\\section*{Aufgabe ${taskShowname[$counter]}$insertCHeading}" >> "$fullFilename"
+                echo "\\section*{$taskname ${taskShowname[$counter]}$insertCHeading}" >> "$fullFilename"
                 written=true
             elif [ $taskTypeL = "sub-heading" ]; then
                 echo "\\subsection*{${taskShowname[$counter]})$insertCHeading}" >> "$fullFilename"
